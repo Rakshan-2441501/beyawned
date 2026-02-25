@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Beyawned")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a6af50c1e6f5728b9a9a5283a9117f76888cbb08")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c8380c026bb1dd264ef24d82221bd2a3343c9bcc")]
 [assembly: System.Reflection.AssemblyProductAttribute("Beyawned")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Beyawned")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

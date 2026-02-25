@@ -61,4 +61,67 @@ public class AccountController : Controller
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToAction("Index", "Home");
     }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult ExternalLogin(string provider, string returnUrl = null)
+    {
+        var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { ReturnUrl = returnUrl });
+        var properties = new AuthenticationProperties { RedirectUri = redirectUrl };
+        return Challenge(properties, provider);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+    {
+        if (remoteError != null)
+        {
+            TempData["Error"] = $"Error from external provider: {remoteError}";
+            return RedirectToAction(nameof(Login));
+        }
+
+        var info = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        if (info.Principal == null || !info.Principal.Identities.Any(i => i.AuthenticationType == "Google"))
+        {
+            TempData["Error"] = "Error loading external login information.";
+            return RedirectToAction(nameof(Login));
+        }
+
+        var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+        var name = info.Principal.FindFirstValue(ClaimTypes.Name) ?? email;
+
+        if (string.IsNullOrEmpty(email))
+        {
+            TempData["Error"] = "Email claim not received from provider.";
+            return RedirectToAction(nameof(Login));
+        }
+
+        // Check if user already exists
+        var user = await _context.AppUsers.FirstOrDefaultAsync(u => u.Email == email);
+        if (user == null)
+        {
+            // Auto-provision user on first external login
+            user = new AppUser
+            {
+                Email = email,
+                PasswordHash = "EXTERNAL_AUTH_NO_PASSWORD"
+            };
+            _context.AppUsers.Add(user);
+            await _context.SaveChangesAsync();
+        }
+
+        // Re-issue cookie based on our internal scheme, clearing the external scheme
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, email),
+            new Claim(ClaimTypes.Email, email),
+        };
+
+        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme, 
+            new ClaimsPrincipal(claimsIdentity));
+
+        return RedirectToAction("Index", "Admin");
+    }
 }
