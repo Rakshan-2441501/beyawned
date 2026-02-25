@@ -1,0 +1,118 @@
+@{
+    ViewData["Title"] = "JD Keyword Picker";
+}
+
+<section class="assessment-page">
+    <div class="container">
+        <div class="assessment-card" style="max-width:760px;">
+            <div class="section-label">FREE TOOL</div>
+            <h1 style="margin-bottom:8px;">JD Keyword Picker</h1>
+            <p style="color:#888;margin-bottom:36px;">
+                Paste a job description to extract the most important keywords and phrases for your resume and LinkedIn profile.
+            </p>
+
+            <div id="jdInput">
+                <div class="form-group">
+                    <label style="font-size:.82rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;display:block;">
+                        Paste Job Description
+                    </label>
+                    <textarea id="jdText"
+                              style="width:100%;background:#111;border:1px solid #2a2a2a;border-radius:8px;color:#fff;
+                                     font-family:inherit;font-size:.93rem;padding:16px;min-height:280px;resize:vertical;"
+                              placeholder="Paste the full job description here..."></textarea>
+                </div>
+                <button onclick="analyzeJD()" class="btn btn-primary" style="width:100%;padding:14px;">
+                    Extract Keywords →
+                </button>
+            </div>
+
+            <div id="jdResults" style="display:none;margin-top:32px;">
+                <div style="margin-bottom:28px;">
+                    <div style="font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:#888;margin-bottom:16px;">HIGH-PRIORITY KEYWORDS</div>
+                    <div id="highPriority" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+                </div>
+                <div style="margin-bottom:28px;">
+                    <div style="font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:#888;margin-bottom:16px;">SKILLS &amp; TOOLS</div>
+                    <div id="skillsKeywords" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+                </div>
+                <div style="margin-bottom:28px;">
+                    <div style="font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:#888;margin-bottom:16px;">SOFT SKILLS &amp; THEMES</div>
+                    <div id="softKeywords" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+                </div>
+
+                <div style="margin-top:32px;padding:24px;background:#111;border:1px solid #2a2a2a;border-radius:10px;text-align:center;">
+                    <p style="color:#888;font-size:.9rem;margin-bottom:16px;">
+                        Know the keywords — now let our HR team weave them naturally into your resume for maximum impact.
+                    </p>
+                    <a href="/Assessment" class="btn btn-accent">Get a Professional Resume →</a>
+                </div>
+
+                <div style="margin-top:20px;text-align:center;">
+                    <button onclick="resetJD()" style="background:none;border:none;color:#888;cursor:pointer;font-size:.85rem;text-decoration:underline;">
+                        ← Analyze another job description
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+const HARD_SKILLS = ['python','javascript','typescript','java','sql','aws','azure','gcp','react','node',
+    'machine learning','data analysis','excel','powerpoint','salesforce','jira','agile','scrum',
+    'figma','kubernetes','docker','git','tableau','power bi','sap','c++','c#','php','ruby','swift',
+    'marketing','seo','ppc','analytics','crm','erp','html','css','rest api','microservices',
+    'product management','project management','financial modelling','budgeting','forecasting'];
+
+const SOFT_SKILLS = ['communication','leadership','collaboration','problem solving','critical thinking',
+    'detail-oriented','self-starter','adaptable','team player','organised','organized','motivated',
+    'initiative','time management','interpersonal','mentoring','coaching','strategic','innovative',
+    'results-driven','customer-focused','cross-functional','stakeholder','analytical'];
+
+function chip(text, type) {
+    const colors = { high:'#c8a96e', skill:'#4a9eca', soft:'#6eaf8e' };
+    const bg     = { high:'rgba(200,169,110,.12)', skill:'rgba(74,158,202,.12)', soft:'rgba(110,175,142,.12)' };
+    return `<span style="background:${bg[type]};border:1px solid ${colors[type]};color:${colors[type]};
+                         border-radius:20px;padding:5px 14px;font-size:.82rem;font-weight:600;">${text}</span>`;
+}
+
+function analyzeJD() {
+    const text = document.getElementById('jdText').value.trim();
+    if (!text || text.length < 80) { alert('Please paste a job description (at least 80 characters).'); return; }
+    const lower = text.toLowerCase();
+    const words = lower.split(/\W+/);
+
+    // Frequency map
+    const freq = {};
+    words.forEach(w => { if (w.length > 4) freq[w] = (freq[w] || 0) + 1; });
+
+    // High priority: words appearing 2+ times, not stop-words
+    const stopWords = new Set(['about','their','there','these','those','which','would','could','should',
+        'being','having','doing','after','before','where','other','every','first','your','that','with',
+        'this','from','they','will','have','more','also','into','than','when','what','over','been']);
+    const highPriority = Object.entries(freq)
+        .filter(([w,c]) => c >= 2 && !stopWords.has(w) && w.length > 4)
+        .sort((a,b) => b[1] - a[1])
+        .slice(0, 14).map(([w]) => w);
+
+    const found_hard = HARD_SKILLS.filter(s => lower.includes(s.toLowerCase()));
+    const found_soft = SOFT_SKILLS.filter(s => lower.includes(s.toLowerCase()));
+
+    document.getElementById('highPriority').innerHTML =
+        (highPriority.length ? highPriority : ['experience','requirements','responsibilities']).map(k => chip(k,'high')).join('');
+    document.getElementById('skillsKeywords').innerHTML =
+        (found_hard.length ? found_hard : ['role-specific tools not detected']).map(k => chip(k,'skill')).join('');
+    document.getElementById('softKeywords').innerHTML =
+        (found_soft.length ? found_soft : ['communication','collaboration']).map(k => chip(k,'soft')).join('');
+
+    document.getElementById('jdInput').style.display   = 'none';
+    document.getElementById('jdResults').style.display = 'block';
+}
+
+function resetJD() {
+    document.getElementById('jdInput').style.display   = 'block';
+    document.getElementById('jdResults').style.display = 'none';
+}
+</script>
+}

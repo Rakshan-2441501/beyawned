@@ -1,0 +1,52 @@
+@model Beyawned.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="login-page">
+    <div class="login-card">
+        <a href="/" class="navbar-brand" style="display:block;margin-bottom:28px;">Bey<span>awned</span></a>
+        <h1>Welcome back</h1>
+        <p class="sub">Log in to your Beyawned account to track your order or access deliverables.</p>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger">@TempData["Error"]</div>
+        }
+
+        <form asp-action="Login" asp-controller="Account" method="post" novalidate>
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" type="email" placeholder="your@email.com" autocomplete="email" />
+                <span asp-validation-for="Email" style="color:#f44336;font-size:.8rem;"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="password" placeholder="••••••••" autocomplete="current-password" />
+                <span asp-validation-for="Password" style="color:#f44336;font-size:.8rem;"></span>
+            </div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+                <label style="display:flex;align-items:center;gap:8px;font-size:.88rem;color:#888;cursor:pointer;">
+                    <input asp-for="RememberMe" type="checkbox" style="accent-color:#c8a96e;" />
+                    Remember me
+                </label>
+                <a href="#" style="font-size:.85rem;color:#c8a96e;">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%;padding:14px;">Sign In</button>
+        </form>
+
+        <p class="login-link">
+            Don't have an account yet?
+            <a href="/Assessment">Take the assessment →</a>
+        </p>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

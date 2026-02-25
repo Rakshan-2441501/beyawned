@@ -1,0 +1,477 @@
+﻿@model Beyawned.Models.ContactViewModel
+@{
+    ViewData["Title"] = "ATS Doesn't Hire You. Recruiters Do.";
+}
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-grid">
+            <div class="hero-left">
+                <div class="hero-eyebrow">
+                    <span class="dot"></span>
+                    <span style="font-size:.8rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#888">Human-Led Career Services</span>
+                </div>
+
+                <h1 class="hero-title">
+                    ATS<br />
+                    <span style="color:#c8a96e">Doesn't Hire You.</span><br />
+                    Recruiters do.
+                </h1>
+                <p class="hero-subtitle">
+                    Get a resume + LinkedIn profile that reads like a <em>human wrote it</em>.
+                    Built for real callbacks, not generic keywords.
+                </p>
+
+                <div class="hero-cta">
+                    <a href="/Assessment" class="btn btn-primary">Take free assessment</a>
+                    <a href="/Products" class="btn btn-outline">View products</a>
+                </div>
+
+                <label class="hero-upload" for="resumeUpload">
+                    <div class="hero-upload-icon">📄</div>
+                    <div>
+                        <strong>+ Add your resume here</strong>
+                        <p>Drag and drop or click to upload (PDF/Word)</p>
+                    </div>
+                    <input type="file" id="resumeUpload" class="hero-upload-input" accept=".pdf,.doc,.docx" />
+                </label>
+
+                <div class="hero-companies" style="margin-top:32px;">
+                    <span class="hero-companies-label">Our customers get hired at</span>
+                    <div class="hero-companies-logos">
+                        <span>Meta</span>
+                        <span>Apple</span>
+                        <span>Amazon</span>
+                        <span>Netflix</span>
+                        <span>Google</span>
+                        <span>Booking.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- right column preview card -->
+            <div class="hero-right">
+                <div class="hero-preview-card">
+                    <div style="background:linear-gradient(135deg,#1a1a1a,#222);padding:48px 32px; text-align:center;">
+                        <div style="background:#2a2a2a;border:1px solid #333;border-radius:10px;padding:28px;max-width:300px;margin:0 auto;">
+                            <div style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#c8a96e;margin-bottom:10px;">Executive Style</div>
+                            <div style="font-size:1.2rem;font-weight:800;margin-bottom:6px;">Your Name</div>
+                            <div style="font-size:.82rem;color:#888;margin-bottom:20px;">Senior Product Manager &#64; FAANG</div>
+                            <div style="display:flex;flex-direction:column;gap:8px;">
+                                <div style="height:8px;background:#2a2a2a;border-radius:4px;border:1px solid #333;"></div>
+                                <div style="height:8px;background:#2a2a2a;border-radius:4px;border:1px solid #333;width:80%;"></div>
+                                <div style="height:8px;background:#2a2a2a;border-radius:4px;border:1px solid #333;width:60%;"></div>
+                            </div>
+                        </div>
+                        <p style="font-size:.78rem;color:#555;margin-top:20px;">Mechanically sound · Humanly perfect!</p>
+                    </div>
+                </div>
+                <div class="hero-badge">
+                    <strong>6 sec</strong>average recruiter read time
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     WHY US
+     ============================================================ -->
+<section class="why-us" id="why-us">
+    <div class="container">
+        <div class="why-us-header">
+            <div class="section-label">WHY US?</div>
+            <h2 class="section-title">
+                Your resume isn't<br />the problem.<br />
+                <span style="color:#888;">How it's built is.</span>
+            </h2>
+            <p style="color:#888;margin-top:16px;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.7;">
+                The difference is judgment. Your assets are crafted by people who understand how recruiters decide.
+            </p>
+            <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap;">
+                <a href="/Assessment" class="btn btn-primary">Take free assessment</a>
+                <a href="/Products" class="btn btn-outline">View products</a>
+            </div>
+        </div>
+
+        <div class="why-us-grid">
+            <div class="why-card">
+                <div class="why-card-num">01</div>
+                <h3>Built by people who've made hiring decisions</h3>
+                <p>We understand recruiter psychology. Our team has sat on the other side of the table. We know what makes a hiring manager stop scrolling and start caring.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-card-num">02</div>
+                <h3>32-point Quality Check</h3>
+                <p>Before anything leaves our team, it passes a non-negotiable HR verification process. If it doesn't meet the standard, it doesn't get delivered.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-card-num">03</div>
+                <h3>We don't fix resumes. We rebuild careers on paper.</h3>
+                <p>Most services reformat what you give them. We extract what you've never been able to say and turn it into a document that opens doors.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-card-num">04</div>
+                <h3>Built for the role you want, not the one you have.</h3>
+                <p>We don't summarize your past. We reverse-engineer your career story to position you for the exact role and industry you're targeting.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-card-num">05</div>
+                <h3>Impact you didn't know you had.</h3>
+                <p>"I don't have any achievements to show" is what most people say. We extract measurable proof from any experience. We investigate, not fabricate.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-card-num">06</div>
+                <h3>Designed for how recruiters actually decide.</h3>
+                <p>Resumes get 6 seconds. LinkedIn profiles get 30. Cover letters get skimmed. We engineer every element for how hiring decisions are really made.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     PRODUCTS PREVIEW
+     ============================================================ -->
+<section class="products-section" id="products">
+    <div class="container">
+        <div class="products-header">
+            <div class="section-label">PRODUCTS</div>
+            <h2 class="section-title">Choose what you need.</h2>
+            <p>Every plan includes professional HR review and recruiter-led strategy.</p>
+        </div>
+
+        <div class="products-grid">
+            <!-- CV -->
+            <div class="product-card" id="cv">
+                <div class="product-card-img" style="background:linear-gradient(135deg,#1a1505,#2a1e08);">
+                    <div style="height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;">📋</div>
+                    <span class="tag">CV</span>
+                </div>
+                <div class="product-card-body">
+                    <h3>CV Writing</h3>
+                    <p>Detailed, structured CV for academic, research, and international applications.</p>
+                    <ul class="product-features">
+                        <li>Academic &amp; Research Focus</li>
+                        <li>International Standards</li>
+                        <li>Advanced Experience Tracking</li>
+                    </ul>
+                    <a href="/Products#cv" class="view-details">View Details &amp; Options →</a>
+                    <div class="product-cta">
+                        <a href="/Assessment?product=cv-existing" class="btn btn-outline btn-sm">Buy existing</a>
+                        <a href="/Assessment?product=cv-new" class="btn btn-primary btn-sm">Buy new</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resume -->
+            <div class="product-card" id="resume">
+                <div class="product-card-img" style="background:linear-gradient(135deg,#050a1a,#0a1528);">
+                    <div style="height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;">📄</div>
+                    <span class="tag">RESUME</span>
+                </div>
+                <div class="product-card-body">
+                    <h3>Resume Writing</h3>
+                    <p>Recruiter-grade, role-specific resume built for callbacks and clarity.</p>
+                    <ul class="product-features">
+                        <li>ATS-Optimized Architecture</li>
+                        <li>Action-Oriented Narrative</li>
+                        <li>6-Second Rule Alignment</li>
+                    </ul>
+                    <a href="/Products#resume" class="view-details">View Details &amp; Options →</a>
+                    <div class="product-cta">
+                        <a href="/Assessment?product=resume-existing" class="btn btn-outline btn-sm">Buy existing</a>
+                        <a href="/Assessment?product=resume-new" class="btn btn-primary btn-sm">Buy new</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LinkedIn -->
+            <div class="product-card" id="linkedin">
+                <div class="product-card-img" style="background:linear-gradient(135deg,#050f1a,#0a1a28);">
+                    <div style="height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;">💼</div>
+                    <span class="tag">LINKEDIN</span>
+                </div>
+                <div class="product-card-body">
+                    <h3>Profile Optimization</h3>
+                    <p>Turn your LinkedIn into a recruiter magnet with strong positioning and keywords.</p>
+                    <ul class="product-features">
+                        <li>SEO-Optimized Headline</li>
+                        <li>Narrative-driven Summary</li>
+                        <li>Strategic Keyword Integration</li>
+                        <li>Premium plan includes full setup</li>
+                    </ul>
+                    <a href="/Products#linkedin" class="view-details">View Details &amp; Options →</a>
+                    <div class="product-cta">
+                        <a href="/Assessment?product=linkedin-beginner" class="btn btn-outline btn-sm">Beginner</a>
+                        <a href="/Assessment?product=linkedin-pro" class="btn btn-primary btn-sm">Pro</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Bundle -->
+            <div class="product-card" id="student">
+                <div class="product-card-img" style="background:linear-gradient(135deg,#0a1505,#141f08);">
+                    <div style="height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;">🎓</div>
+                    <span class="tag">STUDENTS</span>
+                </div>
+                <div class="product-card-body">
+                    <h3>Student Bundle</h3>
+                    <p>Resume + LinkedIn, crafted from projects, academics, internships, and skills.</p>
+                    <ul class="product-features">
+                        <li>Internship-focused Layout</li>
+                        <li>Academic Excellence Setup</li>
+                        <li>Full CV + LinkedIn Bundle</li>
+                        <li>Premium plan includes full setup</li>
+                    </ul>
+                    <a href="/Products#student" class="view-details">View Details &amp; Options →</a>
+                    <div class="product-cta">
+                        <a href="/Assessment?product=student" class="btn btn-primary btn-sm">Buy now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     COMPARISON
+     ============================================================ -->
+<section class="comparison" id="comparison">
+    <div class="container">
+        <div class="comparison-header">
+            <div class="section-label">WHY WE'RE DIFFERENT</div>
+            <h2 class="section-title">Why We're Different</h2>
+            <p>AI tools generate resumes. We deliver recruiter-ready career assets built with real HR judgment, narrative clarity, and positioning.</p>
+        </div>
+
+        <div class="comparison-grid">
+            <div class="comp-side">
+                <div class="tag" style="margin-bottom:12px;">AI RESUME TOOLS</div>
+                <h3>Fast output. Low differentiation.</h3>
+                <p class="sub">Template-driven output with no human context.</p>
+                <ul class="comp-list">
+                    <li><span class="icon">✗</span> Template-driven wording</li>
+                    <li><span class="icon">✗</span> No recruiter judgment</li>
+                    <li><span class="icon">✗</span> ATS-only optimisation</li>
+                    <li><span class="icon">✗</span> Generic bullet points</li>
+                </ul>
+            </div>
+
+            <div class="vs-pill">VS</div>
+
+            <div class="comp-side human">
+                <div class="tag" style="margin-bottom:12px;">HUMAN-LED</div>
+                <h3>HR review. Built for callbacks.</h3>
+                <p class="sub">Crafted with judgment, strategy, and storytelling.</p>
+                <ul class="comp-list">
+                    <li><span class="icon">✓</span> Written &amp; reviewed by HR professionals</li>
+                    <li><span class="icon">✓</span> Storytelling + recruiter positioning</li>
+                    <li><span class="icon">✓</span> Designed for interview outcomes</li>
+                    <li><span class="icon">✓</span> Unlimited revisions included</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="comparison-cta">
+            <a href="/Assessment" class="btn btn-primary">Start Assessment</a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     PROCESS
+     ============================================================ -->
+<section class="process" id="process">
+    <div class="container">
+        <div class="process-header">
+            <div class="section-label">HOW WE WORK</div>
+            <h2 class="section-title">Our Process</h2>
+            <p>Simple, guided, human-reviewed — from assessment to final delivery.</p>
+        </div>
+
+        <div class="process-steps">
+            <div class="step-card">
+                <div class="step-card-img" style="background:linear-gradient(135deg,#1a180a,#2a2410);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">📝</div>
+                <div class="step-card-body">
+                    <div class="step-num">STEP 1 · Assessment</div>
+                    <h3>Assessment</h3>
+                    <p>Answer a short questionnaire about your career goals.</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="step-card-img" style="background:linear-gradient(135deg,#0a1018,#141828);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">💡</div>
+                <div class="step-card-body">
+                    <div class="step-num">STEP 2 · Recommendation</div>
+                    <h3>Recommendation</h3>
+                    <p>We suggest the best package based on recruiter logic.</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="step-card-img" style="background:linear-gradient(135deg,#100a18,#1a1428);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">📤</div>
+                <div class="step-card-body">
+                    <div class="step-num">STEP 3 · Intake</div>
+                    <h3>Intake</h3>
+                    <p>Upload resume or fill structured inputs securely.</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="step-card-img" style="background:linear-gradient(135deg,#0a1808,#141f10);display:flex;align-items:center;justify-content:center;font-size:3.5rem;">🤝</div>
+                <div class="step-card-body">
+                    <div class="step-num">STEP 4 · HR Delivery</div>
+                    <h3>HR Delivery</h3>
+                    <p>We write, review, deliver — revisions included.</p>
+                </div>
+            </div>
+        </div>
+
+        <p class="process-help">Got any questions? <a href="/#contact">Talk to us</a></p>
+    </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section class="faq-section" id="faq">
+    <div class="container">
+        <div class="faq-header">
+            <div class="section-label">FAQ</div>
+            <h2 class="section-title">Frequently Asked<br /><span style="color:#888">Questions</span></h2>
+            <p>Everything you need to know about how Beyawned works — process, privacy, revisions, delivery, and what you get.</p>
+        </div>
+
+        <div class="faq-contact-bar">
+            <div style="display:flex;gap:40px;flex-wrap:wrap;">
+                <div class="faq-contact-item">
+                    <h4>E-MAIL</h4>
+                    <p>hello@beyawned.com</p>
+                </div>
+                <div class="faq-contact-item">
+                    <h4>RESPONSE TIME</h4>
+                    <p>Within a few hours</p>
+                </div>
+            </div>
+            <div>
+                <a href="/#contact" class="btn btn-outline btn-sm">Get in touch</a>
+            </div>
+        </div>
+
+        <div class="faq-trust" style="margin-bottom:32px;justify-content:center;display:flex;gap:20px;flex-wrap:wrap;">
+            <span class="faq-trust-pill">Privacy first — your data is always secure.</span>
+            <span class="faq-trust-pill">Direct access to senior HR professionals.</span>
+            <span class="faq-trust-pill">Human-led guidance, no automated bots.</span>
+        </div>
+
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question" type="button">Is Beyawned an AI resume builder?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">No. Beyawned is a 100% human-led service. Every resume, CV, and LinkedIn profile is written and reviewed by experienced HR professionals and recruiters — not generated by AI templates.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button">Are revisions really unlimited?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes. We don't cap revisions. We keep working with you until you're satisfied the document accurately represents your experience and is positioned for the role you're targeting.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button">What if I don't have a resume yet?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">No problem at all. Our "New" plans are designed for people starting from scratch. You'll fill out a structured intake form and we'll build your document from the ground up.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button">How long does delivery take?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Standard delivery is 3–5 business days. Express options may be available — reach out via the contact form to discuss timelines.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button">Is my information kept confidential?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Absolutely. Your data is handled securely and never shared with third parties. We take privacy seriously. Read our Privacy Policy for full details.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" type="button">What formats do you deliver in?<span class="faq-icon">+</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">We deliver in both PDF and editable Word (.docx) format so you have full control over your documents.</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section class="contact-section" id="contact">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-side">
+                <div class="section-label">WE'RE HERE TO HELP YOU</div>
+                <h2>Discuss Your<br /><span style="color:#c8a96e">Career Questions</span></h2>
+                <p>Are you looking for top-quality career services tailored to your needs? Reach out to us.</p>
+            </div>
+
+            <div class="contact-form-wrap">
+                @if (TempData["ContactSuccess"] != null)
+                {
+                    <div class="alert alert-success">@TempData["ContactSuccess"]</div>
+                }
+
+                <form asp-action="Index" asp-controller="Home" method="post" novalidate>
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label asp-for="Name">Name</label>
+                        <input asp-for="Name" placeholder="Your full name" />
+                        <span asp-validation-for="Name" style="color:#f44336;font-size:.8rem;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email">Email</label>
+                        <input asp-for="Email" type="email" placeholder="your@email.com" />
+                        <span asp-validation-for="Email" style="color:#f44336;font-size:.8rem;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Industry">Industry</label>
+                        <select asp-for="Industry">
+                            <option value="">Select your industry</option>
+                            <option>Technology</option>
+                            <option>Finance &amp; Banking</option>
+                            <option>Healthcare</option>
+                            <option>Marketing &amp; Creative</option>
+                            <option>Engineering</option>
+                            <option>Education &amp; Academia</option>
+                            <option>Operations &amp; Logistics</option>
+                            <option>Other</option>
+                        </select>
+                        <span asp-validation-for="Industry" style="color:#f44336;font-size:.8rem;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Message">Message</label>
+                        <textarea asp-for="Message" placeholder="Tell us about what you need..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;">Get a Solution</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     CTA BANNER
+     ============================================================ -->
+<section class="cta-banner">
+    <div class="container" style="position:relative;z-index:1;">
+        <div class="section-label" style="text-align:center;margin-bottom:8px;">GET STARTED</div>
+        <h2>Take a quick assessment to see what your resume needs — clarity, impact, ATS keywords, or structure.</h2>
+        <p>Human-led • Recruiter-ready • Unlimited revisions</p>
+        <a href="/Assessment" class="btn btn-accent" style="padding:14px 32px;font-size:1rem;">Get Started</a>
+        <div class="cta-banner-pills">
+            <span class="cta-pill">Human-led</span>
+            <span class="cta-pill">Recruiter-ready</span>
+            <span class="cta-pill">Unlimited revisions</span>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Scroll to contact if redirected with anchor
+        if (window.location.search.includes('anchor=contact')) {
+            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+}

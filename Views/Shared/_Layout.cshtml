@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] – Beyawned</title>
+    <meta name="description" content="Human-led resume, CV and LinkedIn services built by HR professionals." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/beyawned.css" asp-append-version="true" />
+    @RenderSection("HeadExtra", required: false)
+</head>
+<body>
+
+    <!-- ======================== NAVBAR ======================== -->
+    <nav class="navbar">
+        <div class="container navbar-inner">
+            <a href="/" class="navbar-brand">Bey<span>awned</span></a>
+
+            <div class="navbar-links">
+                <a href="/#why-us">Why Us</a>
+                <a href="/Products">Products</a>
+                <a href="/#process">How It Works</a>
+                <a href="/#faq">FAQ</a>
+                <a href="/#contact">Contact</a>
+            </div>
+
+            <div class="navbar-actions">
+                <a href="/Account/Login" class="btn btn-outline btn-sm">Login</a>
+                <a href="/Assessment" class="btn btn-primary btn-sm">Take Assessment</a>
+            </div>
+
+            <button class="hamburger" id="hamburger" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobileNav"
+         style="display:none; position:fixed; top:64px; left:0; right:0;
+                background:rgba(10,10,10,.97); border-bottom:1px solid #2a2a2a;
+                z-index:999; padding:24px;">
+        <div style="display:flex; flex-direction:column; gap:18px;">
+            <a href="/#why-us">Why Us</a>
+            <a href="/Products">Products</a>
+            <a href="/#process">How It Works</a>
+            <a href="/#faq">FAQ</a>
+            <a href="/#contact">Contact</a>
+            <a href="/Assessment" class="btn btn-primary" style="margin-top:8px;">Take Assessment</a>
+        </div>
+    </div>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <!-- ======================== FOOTER ======================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="navbar-brand">Bey<span>awned</span></a>
+                    <p>Human-led personal branding services for resumes, LinkedIn, SOPs &amp; career success.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/Products#resume">Resume Writing</a></li>
+                        <li><a href="/Products#linkedin">LinkedIn Makeover</a></li>
+                        <li><a href="/Products#cv">CV Writing</a></li>
+                        <li><a href="/Products#student">Student Bundle</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="/#faq">FAQ</a></li>
+                        <li><a href="/#contact">Contact</a></li>
+                        <li><a href="/Ats">ATS Scanner</a></li>
+                        <li><a href="/JdKeyword">JD Keyword Picker</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="/Legal/Terms">Terms of Service</a></li>
+                        <li><a href="/Legal/Privacy">Privacy Policy</a></li>
+                        <li><a href="/Legal/Refund">Refund Policy</a></li>
+                        <li><a href="/Legal/Delivery">Delivery &amp; Revision Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; @DateTime.Now.Year Beyawned. All rights reserved.</p>
+                <p style="font-size:.8rem; color:#444;">hello@beyawned.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger
+        const ham = document.getElementById('hamburger');
+        const mNav = document.getElementById('mobileNav');
+        if (ham) ham.addEventListener('click', () => {
+            mNav.style.display = mNav.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const open = item.classList.contains('open');
+                document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+                if (!open) item.classList.add('open');
+            });
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

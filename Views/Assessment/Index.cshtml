@@ -1,0 +1,196 @@
+@{
+    ViewData["Title"] = "Career Assessment";
+    var product = Context.Request.Query["product"].ToString();
+}
+
+<section class="assessment-page">
+    <div class="container">
+        <div class="assessment-card">
+            <div class="section-label" id="stepLabel">STEP 1 OF 5</div>
+            <h1>Career Assessment</h1>
+            <p>Answer a few quick questions and we'll recommend the perfect package for your goals.</p>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width:20%;"></div>
+            </div>
+
+            <!-- ---- QUESTIONS ---- -->
+            <div id="assessmentForm">
+
+                <!-- Q1 -->
+                <div class="question-block" id="q1">
+                    <div class="q-label">QUESTION 1</div>
+                    <div class="q-text">What's your current career situation?</div>
+                    <div class="options-grid">
+                        <button class="option-btn" data-q="1" data-val="active">I'm actively job hunting</button>
+                        <button class="option-btn" data-q="1" data-val="passive">I'm passively open to opportunities</button>
+                        <button class="option-btn" data-q="1" data-val="switching">I'm changing industries</button>
+                        <button class="option-btn" data-q="1" data-val="student">I'm a student / recent graduate</button>
+                        <button class="option-btn" data-q="1" data-val="academic">I'm applying for academic / research roles</button>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="question-block" id="q2" style="display:none;">
+                    <div class="q-label">QUESTION 2</div>
+                    <div class="q-text">What do you need most help with?</div>
+                    <div class="options-grid">
+                        <button class="option-btn" data-q="2" data-val="resume">My resume doesn't get responses</button>
+                        <button class="option-btn" data-q="2" data-val="linkedin">My LinkedIn isn't attracting recruiters</button>
+                        <button class="option-btn" data-q="2" data-val="both">Both resume and LinkedIn need work</button>
+                        <button class="option-btn" data-q="2" data-val="cv">I need a CV for international / academic roles</button>
+                        <button class="option-btn" data-q="2" data-val="new">I don't have a resume at all</button>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="question-block" id="q3" style="display:none;">
+                    <div class="q-label">QUESTION 3</div>
+                    <div class="q-text">What level are you targeting?</div>
+                    <div class="options-grid">
+                        <button class="option-btn" data-q="3" data-val="entry">Entry-level / Graduate (0–2 years)</button>
+                        <button class="option-btn" data-q="3" data-val="mid">Mid-level (3–7 years)</button>
+                        <button class="option-btn" data-q="3" data-val="senior">Senior (8+ years)</button>
+                        <button class="option-btn" data-q="3" data-val="executive">Director / Executive / C-suite</button>
+                        <button class="option-btn" data-q="3" data-val="career-break">Returning from a career break</button>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="question-block" id="q4" style="display:none;">
+                    <div class="q-label">QUESTION 4</div>
+                    <div class="q-text">Which industry are you targeting?</div>
+                    <div class="options-grid">
+                        <button class="option-btn" data-q="4" data-val="tech">Technology &amp; Engineering</button>
+                        <button class="option-btn" data-q="4" data-val="finance">Finance &amp; Banking</button>
+                        <button class="option-btn" data-q="4" data-val="healthcare">Healthcare &amp; Science</button>
+                        <button class="option-btn" data-q="4" data-val="creative">Marketing &amp; Creative</button>
+                        <button class="option-btn" data-q="4" data-val="operations">Operations &amp; Management</button>
+                        <button class="option-btn" data-q="4" data-val="other">Other / Not sure yet</button>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="question-block" id="q5" style="display:none;">
+                    <div class="q-label">QUESTION 5</div>
+                    <div class="q-text">How soon do you need this?</div>
+                    <div class="options-grid">
+                        <button class="option-btn" data-q="5" data-val="urgent">ASAP — I'm applying now</button>
+                        <button class="option-btn" data-q="5" data-val="week">Within the next week</button>
+                        <button class="option-btn" data-q="5" data-val="month">Within the next month</button>
+                        <button class="option-btn" data-q="5" data-val="planning">Just planning ahead</button>
+                    </div>
+                </div>
+
+                <!-- Result -->
+                <div id="result" style="display:none;">
+                    <div style="text-align:center;padding:20px 0;">
+                        <div style="font-size:3rem;margin-bottom:16px;">🎯</div>
+                        <div class="q-label" style="text-align:center;">YOUR RECOMMENDATION</div>
+                        <div id="resultTitle" style="font-size:1.5rem;font-weight:800;margin:12px 0 8px;"></div>
+                        <div id="resultDesc" style="color:#888;font-size:.95rem;line-height:1.7;max-width:480px;margin:0 auto 28px;"></div>
+                        <a id="resultCta" href="/Products" class="btn btn-accent" style="padding:14px 36px;font-size:1rem;">
+                            View Recommended Product →
+                        </a>
+                        <br /><br />
+                        <a href="/#contact" style="color:#888;font-size:.85rem;border-bottom:1px solid #333;">
+                            Prefer to talk first? Contact us →
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- NAV BUTTONS -->
+            <div class="assessment-nav" id="assessmentNav">
+                <button class="btn btn-outline btn-sm" id="prevBtn" style="display:none;" onclick="prevQ()">← Back</button>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+    const answers = {};
+    let current = 1;
+    const total = 5;
+
+    // Auto-select product from query string
+    const preset = '@product';
+
+    document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const q = btn.dataset.q;
+            document.querySelectorAll(`[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            answers[q] = btn.dataset.val;
+            setTimeout(() => nextQ(), 300);
+        });
+    });
+
+    function nextQ() {
+        if (current < total) {
+            document.getElementById('q' + current).style.display = 'none';
+            current++;
+            document.getElementById('q' + current).style.display = 'block';
+            updateProgress();
+            document.getElementById('prevBtn').style.display = 'block';
+        } else {
+            document.getElementById('q' + current).style.display = 'none';
+            document.getElementById('assessmentNav').style.display = 'none';
+            showResult();
+        }
+    }
+
+    function prevQ() {
+        if (current > 1) {
+            document.getElementById('q' + current).style.display = 'none';
+            current--;
+            document.getElementById('q' + current).style.display = 'block';
+            updateProgress();
+            if (current === 1) document.getElementById('prevBtn').style.display = 'none';
+        }
+    }
+
+    function updateProgress() {
+        const pct = (current / total) * 100;
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('stepLabel').textContent = `STEP ${current} OF ${total}`;
+    }
+
+    function showResult() {
+        const titleEl = document.getElementById('resultTitle');
+        const descEl  = document.getElementById('resultDesc');
+        const ctaEl   = document.getElementById('resultCta');
+        document.getElementById('result').style.display = 'block';
+        document.getElementById('progressFill').style.width = '100%';
+        document.getElementById('stepLabel').textContent = 'COMPLETE';
+
+        const need = answers['2'];
+        const sit  = answers['1'];
+
+        if (sit === 'student') {
+            titleEl.textContent = 'Student Bundle';
+            descEl.textContent  = 'Based on your answers, the Student Bundle is your best fit — resume + LinkedIn built from academics, projects, and internships.';
+            ctaEl.href = '/Products#student';
+        } else if (sit === 'academic' || need === 'cv') {
+            titleEl.textContent = 'CV Writing';
+            descEl.textContent  = 'For academic and international applications you need a structured, detailed CV — not a resume. Our CV Writing service is the right fit.';
+            ctaEl.href = '/Products#cv';
+        } else if (need === 'linkedin') {
+            titleEl.textContent = 'LinkedIn Profile Optimization';
+            descEl.textContent  = 'Your LinkedIn is your 24/7 recruiter magnet. We\'ll transform it with SEO-optimized positioning and keyword strategy.';
+            ctaEl.href = '/Products#linkedin';
+        } else if (need === 'both') {
+            titleEl.textContent = 'Resume + LinkedIn Bundle';
+            descEl.textContent  = 'You need both assets working together. Start with Products to find the right combination for your career goals.';
+            ctaEl.href = '/Products';
+        } else {
+            titleEl.textContent = 'Resume Writing';
+            descEl.textContent  = 'A recruiter-grade, role-specific resume built for callbacks. Engineered to win the 6-second scan and move you to interviews.';
+            ctaEl.href = '/Products#resume';
+        }
+    }
+</script>
+}

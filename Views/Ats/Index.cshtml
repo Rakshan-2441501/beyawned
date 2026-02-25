@@ -1,0 +1,134 @@
+@{
+    ViewData["Title"] = "ATS Resume Scanner";
+}
+
+<section class="assessment-page">
+    <div class="container">
+        <div class="assessment-card" style="max-width:760px;">
+            <div class="section-label">FREE TOOL</div>
+            <h1 style="margin-bottom:8px;">ATS Resume Scanner</h1>
+            <p style="color:#888;margin-bottom:36px;">
+                Paste your resume text below to get instant feedback on ATS compatibility, keyword density, and formatting issues.
+            </p>
+
+            <div id="scannerInput">
+                <div class="form-group">
+                    <label style="font-size:.82rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;display:block;">
+                        Paste Your Resume Text
+                    </label>
+                    <textarea id="resumeText"
+                              style="width:100%;background:#111;border:1px solid #2a2a2a;border-radius:8px;color:#fff;
+                                     font-family:inherit;font-size:.93rem;padding:16px;min-height:280px;resize:vertical;"
+                              placeholder="Paste your resume content here..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label style="font-size:.82rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px;display:block;">
+                        Target Job Title (optional)
+                    </label>
+                    <input id="jobTitle" type="text"
+                           style="width:100%;background:#111;border:1px solid #2a2a2a;border-radius:8px;color:#fff;
+                                  font-family:inherit;font-size:.93rem;padding:13px 16px;"
+                           placeholder="e.g. Product Manager, Software Engineer..." />
+                </div>
+                <button onclick="runScan()" class="btn btn-primary" style="width:100%;padding:14px;">
+                    Scan Resume →
+                </button>
+            </div>
+
+            <div id="scanResults" style="display:none;margin-top:32px;">
+                <div id="scoreBlock" style="text-align:center;padding:28px 0;border-bottom:1px solid #2a2a2a;margin-bottom:28px;">
+                    <div style="font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:#888;margin-bottom:8px;">ATS COMPATIBILITY SCORE</div>
+                    <div id="scoreValue" style="font-size:4rem;font-weight:900;color:#c8a96e;"></div>
+                    <div id="scoreLabel" style="font-size:.9rem;color:#888;margin-top:4px;"></div>
+                </div>
+
+                <div id="checksList"></div>
+
+                <div style="margin-top:32px;padding:24px;background:#111;border:1px solid #2a2a2a;border-radius:10px;text-align:center;">
+                    <p style="color:#888;font-size:.9rem;margin-bottom:16px;">
+                        Want a human expert to fix these issues? Our HR team builds resumes that pass ATS <em>and</em> impress recruiters.
+                    </p>
+                    <a href="/Assessment" class="btn btn-accent">Get a Professional Resume →</a>
+                </div>
+
+                <div style="margin-top:20px;text-align:center;">
+                    <button onclick="resetScanner()" style="background:none;border:none;color:#888;cursor:pointer;font-size:.85rem;text-decoration:underline;">
+                        ← Scan another resume
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+<script>
+function runScan() {
+    const text = document.getElementById('resumeText').value.trim();
+    if (!text || text.length < 50) {
+        alert('Please paste at least 50 characters of resume text.');
+        return;
+    }
+
+    const words    = text.split(/\s+/).length;
+    const chars    = text.length;
+    const lower    = text.toLowerCase();
+
+    const checks = [
+        { label: 'Word count (300–700 ideal)', pass: words >= 300 && words <= 700,
+          detail: `Your resume has ${words} words.` },
+        { label: 'Contains email address',
+          pass: /[\w.-]+@@[\w.-]+\.\w+/.test(text),
+          detail: pass => pass ? 'Email found.' : 'No email address detected.' },
+        { label: 'Contains phone number',
+          pass: /(\+?\d[\d\s\-().]{7,}\d)/.test(text),
+          detail: pass => pass ? 'Phone number found.' : 'No phone number detected.' },
+        { label: 'Action verbs present',
+          pass: ['led','managed','built','developed','achieved','delivered','designed',
+                 'increased','reduced','created','launched','improved','drove','owned'].some(v => lower.includes(v)),
+          detail: pass => pass ? 'Action verbs detected.' : 'Add strong action verbs (Led, Delivered, Built…).' },
+        { label: 'Quantified achievements',
+          pass: /\d+\s*(%|percent|x|times|million|k\b|\$)/.test(lower),
+          detail: pass => pass ? 'Numbers/metrics found — great!' : 'Add quantified achievements (e.g., "increased revenue by 30%").' },
+        { label: 'Skills section present',
+          pass: /(skills|technologies|tools|languages|competencies)/i.test(text),
+          detail: pass => pass ? 'Skills section detected.' : 'Add a dedicated Skills section for better ATS parsing.' },
+        { label: 'No tables or graphics (text-based)',
+          pass: true,
+          detail: 'Text-based content detected — ATS-friendly format.' },
+        { label: 'Consistent date formatting',
+          pass: /(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|\d{4})/i.test(text),
+          detail: pass => pass ? 'Date patterns detected.' : 'Include clear date ranges for each role.' },
+    ];
+
+    const passed = checks.filter(c => typeof c.pass === 'boolean' ? c.pass : true).length;
+    const score  = Math.round((passed / checks.length) * 100);
+
+    document.getElementById('scoreValue').textContent = score + '%';
+    document.getElementById('scoreLabel').textContent =
+        score >= 80 ? 'Good ATS compatibility' :
+        score >= 60 ? 'Moderate — improvements needed' : 'Low — significant issues found';
+
+    const list = document.getElementById('checksList');
+    list.innerHTML = checks.map(c => {
+        const ok  = typeof c.pass === 'boolean' ? c.pass : true;
+        const det = typeof c.detail === 'function' ? c.detail(ok) : c.detail;
+        return `<div style="display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid #1a1a1a;">
+            <span style="font-size:1rem;flex-shrink:0;margin-top:2px;">${ok ? '✅' : '❌'}</span>
+            <div>
+                <div style="font-weight:600;font-size:.9rem;">${c.label}</div>
+                <div style="font-size:.82rem;color:#888;margin-top:3px;">${det}</div>
+            </div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('scannerInput').style.display = 'none';
+    document.getElementById('scanResults').style.display  = 'block';
+}
+
+function resetScanner() {
+    document.getElementById('scannerInput').style.display = 'block';
+    document.getElementById('scanResults').style.display  = 'none';
+}
+</script>
+}
