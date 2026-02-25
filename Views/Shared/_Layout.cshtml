@@ -8,10 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/beyawned.css" asp-append-version="true" />
     @RenderSection("HeadExtra", required: false)
 </head>
 <body>
+    
+    <!-- Custom Trailing Glow Cursor -->
+    <div class="cursor-glow" id="cursorGlow"></div>
 
     <!-- ======================== NAVBAR ======================== -->
     <nav class="navbar">
@@ -116,6 +120,42 @@
                 if (!open) item.classList.add('open');
             });
         });
+    </script>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Init AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50,
+        });
+
+        // Custom Cursor Tracker
+        const glow = document.getElementById('cursorGlow');
+        if (glow && window.matchMedia("(pointer: fine)").matches) {
+            let mouseX = 0;
+            let mouseY = 0;
+            let currentX = 0;
+            let currentY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                // Add class on first move so it doesn't default to top left
+                if (!glow.classList.contains('active')) glow.classList.add('active');
+            });
+
+            function animateCursor() {
+                // Smooth easing towards exact mouse pos
+                currentX += (mouseX - currentX) * 0.15;
+                currentY += (mouseY - currentY) * 0.15;
+                glow.style.transform = `translate(${currentX}px, ${currentY}px)`;
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+        }
     </script>
 
     @await RenderSectionAsync("Scripts", required: false)

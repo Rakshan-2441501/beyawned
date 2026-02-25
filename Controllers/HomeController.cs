@@ -6,6 +6,13 @@ namespace Beyawned.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly AppDbContext _context;
+
+    public HomeController(AppDbContext context)
+    {
+        _context = context;
+    }
+
     // GET /
     public IActionResult Index()
     {
@@ -23,8 +30,18 @@ public class HomeController : Controller
             return View(model);
         }
 
-        // TODO: wire up email / CRM
-        TempData["ContactSuccess"] = "Thanks! We'll get back to you within a few hours.";
+        var submission = new ContactSubmission
+        {
+            Name = model.Name,
+            Email = model.Email,
+            Industry = model.Industry ?? string.Empty,
+            Message = model.Message ?? string.Empty
+        };
+
+        _context.ContactSubmissions.Add(submission);
+        _context.SaveChanges();
+
+        TempData["ContactSuccess"] = "Thanks! We've received your submission and will get back to you within a few hours.";
         return RedirectToAction(nameof(Index), new { anchor = "contact" });
     }
 

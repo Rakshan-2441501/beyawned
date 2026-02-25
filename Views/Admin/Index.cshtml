@@ -1,0 +1,61 @@
+@model IEnumerable<Beyawned.Models.ContactSubmission>
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<section class="admin-page" style="padding-top:120px; padding-bottom:100px;">
+    <div class="container">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 32px;" data-aos="fade-down">
+            <div>
+                <div class="section-label">ADMINISTRATION</div>
+                <h1>Contact Submissions</h1>
+            </div>
+            <form asp-controller="Account" asp-action="Logout" method="post">
+                <button type="submit" class="btn btn-outline btn-sm">Sign Out</button>
+            </form>
+        </div>
+
+        <div style="background:#111; border:1px solid #2a2a2a; border-radius:12px; overflow:hidden;" data-aos="fade-up" data-aos-delay="200">
+            @if (!Model.Any())
+            {
+                <div style="padding: 48px; text-align: center; color: #888;">
+                    <div style="font-size: 3rem; margin-bottom: 16px;">📥</div>
+                    <p>No contact submissions yet.</p>
+                </div>
+            }
+            else
+            {
+                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <thead>
+                        <tr style="background: #1a1a1a; border-bottom: 1px solid #2a2a2a;">
+                            <th style="padding: 16px; font-size: .85rem; color: #888; text-transform: uppercase; letter-spacing: .05em;">Date</th>
+                            <th style="padding: 16px; font-size: .85rem; color: #888; text-transform: uppercase; letter-spacing: .05em;">Name</th>
+                            <th style="padding: 16px; font-size: .85rem; color: #888; text-transform: uppercase; letter-spacing: .05em;">Email</th>
+                            <th style="padding: 16px; font-size: .85rem; color: #888; text-transform: uppercase; letter-spacing: .05em;">Industry</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var sub in Model)
+                        {
+                            <tr style="border-bottom: 1px solid #2a2a2a;">
+                                <td style="padding: 16px; font-size: .95rem; color: #ccc;">@sub.SubmittedAt.ToString("MMM dd, yyyy HH:mm")</td>
+                                <td style="padding: 16px; font-size: .95rem; font-weight: 600;">@sub.Name</td>
+                                <td style="padding: 16px; font-size: .95rem; color: #c8a96e;">@sub.Email</td>
+                                <td style="padding: 16px; font-size: .95rem; color: #aaa;">@sub.Industry</td>
+                            </tr>
+                            @if (!string.IsNullOrWhiteSpace(sub.Message))
+                            {
+                                <tr style="border-bottom: 1px solid #2a2a2a; background: #0a0a0a;">
+                                    <td colspan="4" style="padding: 16px 16px 24px 16px;">
+                                        <div style="font-size: .8rem; color: #888; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px;">Message</div>
+                                        <div style="font-size: .95rem; color: #bbb; line-height: 1.6;">@sub.Message</div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</section>
