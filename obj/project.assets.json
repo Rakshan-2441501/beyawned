@@ -8,26 +8,24 @@
     "net10.0": []
   },
   "packageFolders": {
-    "C:\\Users\\vicky\\.nuget\\packages\\": {}
+    "/Users/rakshan/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vicky\\Downloads\\New folder\\Beyawned\\Beyawned.csproj",
+      "projectUniqueName": "/Users/rakshan/Desktop/Food Loop/beyawned/Beyawned.csproj",
       "projectName": "Beyawned",
-      "projectPath": "C:\\Users\\vicky\\Downloads\\New folder\\Beyawned\\Beyawned.csproj",
-      "packagesPath": "C:\\Users\\vicky\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vicky\\Downloads\\New folder\\Beyawned\\obj\\",
+      "projectPath": "/Users/rakshan/Desktop/Food Loop/beyawned/Beyawned.csproj",
+      "packagesPath": "/Users/rakshan/.nuget/packages/",
+      "outputPath": "/Users/rakshan/Desktop/Food Loop/beyawned/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\vicky\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/rakshan/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -70,7 +68,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
